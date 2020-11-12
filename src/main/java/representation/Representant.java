@@ -7,6 +7,7 @@ public class Representant {
 	private final String prenom;
 	private String adresse;
 	private float salaireFixe;
+        private ZoneGeographique secteur;
 
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
@@ -43,13 +44,12 @@ public class Representant {
 	}
 
 	public ZoneGeographique getSecteur() {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		return secteur;
+		
 	}
 
 	public void setSecteur(ZoneGeographique secteur) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		this.secteur = secteur;
 	}
 
 	/**
