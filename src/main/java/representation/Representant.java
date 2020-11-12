@@ -8,12 +8,13 @@ public class Representant {
 	private String adresse;
 	private float salaireFixe;
         private ZoneGeographique secteur;
-        private float [] chiffreAffaire = new float[12];
-
+        private float [] chiffreAffaires = new float[12];
+        
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
+                this.secteur = secteur;
 	}
 
 	public int getNumero() {
@@ -63,9 +64,9 @@ public class Representant {
 			throw new IllegalArgumentException("Le mois doit être compris entre 0 et 11");
 		}
 		if (montant < 0) {
-			throw new IllegalArgumentException("Le montant doit être positif ou nul");
+			throw new IllegalArgumentException("Le montant doit être positif ou null");
 		}
-		this.chiffreAffaire [mois] = montant ;
+		this.chiffreAffaires[mois] = montant;
 	}
 
 	/**
@@ -75,12 +76,17 @@ public class Representant {
 	 * @return le salaire pour ce mois, tenant compte du salaire fixe, de l'indemnité repas, et du pourcentage sur CA
 	 */
 	public float salaireMensuel(int mois, float pourcentage) {
-		float salaire;
-                
-                salaire = this.salaireFixe + this.secteur.getIndemniteRepas() + this.chiffreAffaire[mois]*(1 + pourcentage);
-                
-                return salaire;
-        }
+            
+            if (pourcentage < 0) {
+			throw new IllegalArgumentException("Le pourcentage doit être positif ou null");
+		}
+            
+            float salaire;    
+            
+            salaire = this.salaireFixe + this.secteur.getIndemniteRepas() + this.chiffreAffaires[mois]*(pourcentage);    
+            
+            return salaire;
+	}
 
 	@Override
 	public String toString() {
